@@ -1,0 +1,75 @@
+processo
+{
+int id
+int informacao[5]
+int tempocpu
+int tempoio
+int prioridade
+}
+
+Processos cpu = Quando o vetor de informacao so possui valores zero
+Processo IO = Quando o vetor de informacao possui algum valor 1
+
+3 Filas de processos 1° fila de processos de CPU os que executam
+					 2° fila de processos de IO os que esperam sua IO terminar
+					 3° fila processos terminados dps de toda a operação 
+
+Cada processo quando esta sendo executado ele ira consumir seu tempocpu na medida do quantum do cpu que sera um valor unico e estatico.
+Em simultaneo sua informacao e percorrida, caso seja identificado valor diferente de zero
+o processo sera bloqueado e sera enviado a fila de processos de IO
+
+Na fila de IO o processo consome todo o seu tempoIO para resolver a ocorencia do IO
+terminando esse processo de IO retorna a fila de processos de CPU
+que continuaria o seu trablho simultaneo ao da 2° fila
+
+ao retonar a 1° fila
+o processo tera prioridade e fura a fila entrando como proximo processo a ser executado
+Essa condiçao gera uma concorrencia
+
+Sempre que um processo de io retorna para a 1° fila , ele ira diminuir a prioridade em 1 de todos os processos
+que estao na 1°fila
+Ele deve obedecer a seguinte regra
+quando um procsso com prioridade =1, o processo de io nao pode entrar na frente dele, e sim atras da ultima ocorrencia 
+que nao possui prioridade =1.
+garantindo que processos antigos morram sem usar a cpu
+processos que foram identificados como io tem sua prioridade alterada pra 1.
+
+Se um processo tiver mais de um 1 em seu vetor de informacao significa mais de uma açao io 
+exemplo
+
+'00101'  ele vai resolve um e volta '00001' precisa retornar para resolver o ultimo io
+
+
+Exemplos
+
+id=01
+tempocpu= 15
+tmpoio=10
+informacao='00000'
+prioridade=5
+
+
+id=02
+tempocpu=9
+tmpoio=20
+informacao='000010'
+prioridade=6
+
+
+id=03
+tempocpu=5
+tmpoio=5
+informacao='11111'
+prioridade=6
+
+
+o tempo em que cada processo passa na cpu e fixo exemplo quantum =5 
+todos vao consumir 5 ate a proxima epoca de execução 
+leve isso em considereçao 
+
+
+Simplificando
+processo entra le a informaçao gasta seu tempo disponivel(quantum) e sai, volta ao fim da fila 
+e repete ate o seu tempocpu zerar ai sim ele terminou execuçao vai para 3° fila pra mostrar que terminou
+processo que entrou le a informaçao é de io ?vai pra 2° fila espera o tempo resolve o io, volta pra 1° fila usando a regra de prioridade
+repete o processo ate tudo ser executado, terminou tudo via pra 3° fila e assim por diant
