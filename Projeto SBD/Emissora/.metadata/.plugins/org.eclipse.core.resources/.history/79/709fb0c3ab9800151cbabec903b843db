@@ -9,6 +9,7 @@ public class Conexao {
 		Class.forName("org.postgresql.Driver");
 		
 		String url= "jdbc:postgresql://localhost:5432/Emissora";
+		//String url= "jdbc:postgresql://localhost:5432/postgres?search_path=emissora";
 		String user= "postgres";
 		String password= "211091";
 		

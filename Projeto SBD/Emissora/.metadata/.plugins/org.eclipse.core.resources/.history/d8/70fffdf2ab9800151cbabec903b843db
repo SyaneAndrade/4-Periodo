@@ -107,7 +107,7 @@ public class FuncionarioDB {
 			objFuncionario.setCodFunc(rs.getInt("CodFunc"));
 			objFuncionario.setNome(rs.getString("Nome"));
 			objFuncionario.setEndereco(rs.getString("Endereco"));
-			objFuncionario.setTelefone(rs.getString("Telefones"));
+			objFuncionario.setTelefone(rs.getString("Telefone"));
 			
 			lstFuncionario.add(objFuncionario);		
 		}
@@ -130,7 +130,7 @@ public class FuncionarioDB {
 			objFuncionario.setCodFunc(rs.getInt("CodFunc"));
 			objFuncionario.setNome(rs.getString("Nome"));
 			objFuncionario.setEndereco(rs.getString("Endereco"));
-			objFuncionario.setTelefone(rs.getString("Telefones"));
+			objFuncionario.setTelefone(rs.getString("Telefone"));
 			
 			lstFuncionario.add(objFuncionario);		
 		}
