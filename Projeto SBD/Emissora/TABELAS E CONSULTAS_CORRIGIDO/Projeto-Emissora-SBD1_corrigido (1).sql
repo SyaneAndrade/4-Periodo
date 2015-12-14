@@ -7,7 +7,7 @@
 #Criação do esquema e das tabelas
 #*/
 
-DROP SCHEMA IF EXISTS RAGLA CASCADE;
+DROP SCHEMA IF EXISTS Emissora CASCADE;
 CREATE SCHEMA Emissora;
 SET search_path TO Emissora;
 

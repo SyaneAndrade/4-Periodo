@@ -1,0 +1,91 @@
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+
+public class Main {
+	
+	private static Scanner a;
+
+	public static void main(String[] arg) throws ClassNotFoundException, SQLException{
+		
+		FuncionarioDB fdb = new FuncionarioDB();
+		DependenteDB ddb = new DependenteDB();
+		EmissoraDB edb = new EmissoraDB();
+		DepartamentosDB dtb = new DepartamentosDB();
+		ProjetosDB pdb = new ProjetosDB();
+		
+		List<Funcionario>  flist = new  ArrayList<Funcionario>();
+		List<Dependente>   dlist = new ArrayList<Dependente>();
+		List<Emissora>     elist = new ArrayList<Emissora>();
+		List<Departamentos> dtlist = new ArrayList<Departamentos>();
+		List<Projetos> plist = new ArrayList<Projetos>();
+		
+		a = new Scanner(System.in);
+		int aux;
+		System.out.println("Entre com o valor desejado:  \n1) Todos Funcionario \n2)Tecnicos \n3)Produtores \n4)Gestores \n5)Dependentes \n6)Emissora \n7)Departamentos  ");
+		aux = a.nextInt();
+		
+		switch(aux){
+		case 1:
+			flist = fdb.listarFuncionario();
+			break;
+		case 2:
+			flist = fdb.listarFuncionarioT();
+			break;
+		case 3:
+			flist = fdb.listarFuncionarioP();
+			break;
+		case 4:
+			flist = fdb.listarFuncionarioG();
+			break;
+		case 5:
+			dlist = ddb.listarDependente();
+			break;
+		case 6:
+			elist = edb.listarEmissora();
+			break;
+		case 7:
+			dtlist = dtb.listarDepartamentos();
+			break;
+		case 8:
+			plist = pdb.listarProjetos();
+			break;
+		default:
+			System.out.println("Entrada invalida!!!");
+			break;
+		}
+		if (dlist != null){
+			for (Dependente d: dlist){
+				
+				System.out.println(d.getCodFunc() + " " + d.getNome()+ " "+ d.getSexo()+ " "+d.getDataNascimento());
+			
+			}
+		}
+		
+		if(flist != null){
+			for(Funcionario f: flist){
+				
+				System.out.println(f.getCodEmi() + " " + f.getCodFunc() + " " + f.getNome() + f.getEndereco() + " "+ f.getTelefone()+ " "+f.getSalario());
+			}
+		}
+		if(elist != null) {
+			for (Emissora E: elist){
+				System.out.println(E.getCodEmi()+" "+ E.getNome()+" "+ E.getEndereco());
+			}
+		}
+		if(dtlist != null){
+			for (Departamentos dt: dtlist){
+				System.out.println(dt.getCodEmi()+" "+ dt.getCodDep()+" "+dt.getNomeDep()+" "+dt.getInfoDep());
+			}
+		if(plist != null){
+			for (Projetos p: plist){
+				System.out.println(p.getCodDep()+" "+p.getCodProj()+" "+" "+p.getNome()+" "+p.getInfoProj()+" "+p.getData());
+			}
+		}
+		}
+		
+	}
+}
+

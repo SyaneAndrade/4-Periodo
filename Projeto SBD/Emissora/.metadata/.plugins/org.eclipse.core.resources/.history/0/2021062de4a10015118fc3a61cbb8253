@@ -1,0 +1,56 @@
+/*
+  CREATE TABLE Dependentes (
+	CodFunc smallint,
+
+	Nome varchar(40) not null,
+	Sexo varchar (2) not null,
+	DataNascimento date,     #tirei idade e o relacao
+
+	CONSTRAINT Dependentes_fk FOREIGN KEY (CodFunc)
+	REFERENCES Funcionario(CodFunc),
+	CONSTRAINT Dependentes_pk PRIMARY KEY (CodFunc,Nome)
+);
+ */
+public class Dependente {
+	
+	private String Nome;
+	private String Sexo;
+	private String DataNascimento;
+	
+	public Dependente(){
+		
+	}
+	
+	public Dependente(String Nome, String Sexo, String Nasc){
+		
+		this.Nome = Nome;
+		this.Sexo = Sexo;
+		this.DataNascimento = Nasc;
+		
+	}
+
+	public String getNome() {
+		return Nome;
+	}
+
+	public void setNome(String nome) {
+		Nome = nome;
+	}
+
+	public String getSexo() {
+		return Sexo;
+	}
+
+	public void setSexo(String sexo) {
+		Sexo = sexo;
+	}
+
+	public String getDataNascimento() {
+		return DataNascimento;
+	}
+
+	public void setDataNascimento(String dataNascimento) {
+		DataNascimento = dataNascimento;
+	}
+
+}

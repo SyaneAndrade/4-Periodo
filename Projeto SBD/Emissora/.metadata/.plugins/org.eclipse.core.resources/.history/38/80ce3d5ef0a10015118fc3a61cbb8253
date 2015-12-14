@@ -1,0 +1,23 @@
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+
+public class ProjetosDB {
+	
+	public void insereProjetos(Projetos objProjetos) throws ClassNotFoundException, SQLException {
+		//INSERT INTO Projetos VALUES ( 'Dep09',	'1',	'Rede Nova',	'Descrições e explicação da nova rede disponével para transmissão da emissora.', 	'03-07-1999');	
+		String sql = "Insert into Projetos values(?,?,?,?,?)";
+		
+		PreparedStatement ps = Conexao.connection().prepareStatement(sql);
+		
+		ps.setString(1,objProjetos.getCodDep());
+		ps.setString(2,objProjetos.getCodProj());
+		ps.setString(3, objProjetos.getNome());
+		ps.setString(4,objProjetos.getInfoProj());
+		ps.setDate(4, objProjetos.getData());
+		
+		ps.execute();
+		ps.close();
+		Conexao.connection().close();
+	}
+}

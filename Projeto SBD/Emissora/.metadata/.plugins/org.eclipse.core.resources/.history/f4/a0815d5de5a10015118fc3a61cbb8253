@@ -1,0 +1,47 @@
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class DependenteDB {
+	//Insert Depedente no BD;
+	
+	public void insereDependente(Dependente objDependente) throws ClassNotFoundException, SQLException {
+		//INSERT INTO Dependentes VALUES(1 , 'Maria Clara Neves',	        'F',    '24-03-2004');	
+		String sql = "Insert into Dependente values(?,?,?,?)";
+		
+		PreparedStatement ps = Conexao.connection().prepareStatement(sql);
+		ps.setLong(1, objDependente.getCodFunc());
+		ps.setString(2, objDependente.getNome());
+		ps.setString(3, objDependente.getSexo());
+		ps.setDate(4,objDependente.getDataNascimento());
+		ps.execute();
+		ps.close();
+		Conexao.connection().close();
+	}
+	
+public List<Dependente> listarDependente() throws ClassNotFoundException, SQLException{
+		
+		List<Dependente> lstDependente = new ArrayList<Dependente>();
+		String sql =  "SELECT * FROM Dependente;";
+		PreparedStatement ps = Conexao.connection().prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()){
+			
+			Dependente objDependente = new Dependente();
+			
+			objDependente.setCodFunc(rs.getInt("CodFunc"));
+			objDependente.setNome(rs.getString("Nome"));
+			objDependente.setSexo(rs.getString("Sexo"));
+			objDependente.setDataNascimento(rs.getDate("Data"));
+			
+			lstDependente.add(objDependente);		
+		}
+		ps.close();
+		Conexao.connection().close();
+		return lstDependente;
+	}
+
+}

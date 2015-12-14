@@ -1,0 +1,13 @@
+import javax.swing.JPanel;
+
+
+public class FuncionarioPainel extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public FuncionarioPainel() {
+
+	}
+
+}
