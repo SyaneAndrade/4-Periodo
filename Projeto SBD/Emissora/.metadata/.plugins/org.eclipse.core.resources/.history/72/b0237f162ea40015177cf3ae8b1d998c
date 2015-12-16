@@ -1,0 +1,15 @@
+import javax.swing.JPanel;
+import javax.swing.JMenuBar;
+import javax.swing.JTable;
+
+
+public class AdcDependente extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public AdcDependente() {
+
+	}
+
+}

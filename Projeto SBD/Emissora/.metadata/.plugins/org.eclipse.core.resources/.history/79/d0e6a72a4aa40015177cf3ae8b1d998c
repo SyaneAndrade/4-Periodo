@@ -1,0 +1,62 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+
+
+public class JCliente extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JCliente frame = new JCliente();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public JCliente() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		
+		JLabel lblMenuCliente = new JLabel("Menu Cliente");
+		lblMenuCliente.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMenuCliente.setBounds(177, 11, 106, 24);
+		contentPane.add(lblMenuCliente);
+		
+		JButton btnCadastraCliente = new JButton("Cadastra Cliente");
+		btnCadastraCliente.setBounds(164, 74, 135, 23);
+		contentPane.add(btnCadastraCliente);
+		
+		JButton btnNewButton = new JButton("Ver todos");
+		btnNewButton.setBounds(164, 108, 135, 23);
+		contentPane.add(btnNewButton);
+		
+		JButton btnMenuInicial = new JButton("Menu Inicial");
+		btnMenuInicial.setBounds(164, 213, 119, 23);
+		contentPane.add(btnMenuInicial);
+	}
+
+}

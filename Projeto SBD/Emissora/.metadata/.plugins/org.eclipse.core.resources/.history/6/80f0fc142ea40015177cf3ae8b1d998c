@@ -1,0 +1,13 @@
+import javax.swing.JPanel;
+
+
+public class AdcDependente extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public AdcDependente() {
+
+	}
+
+}

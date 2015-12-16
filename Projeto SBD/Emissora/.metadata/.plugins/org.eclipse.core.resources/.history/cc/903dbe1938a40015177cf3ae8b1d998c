@@ -1,0 +1,129 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+
+public class AdDependente extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField Nome;
+	private JTextField Sexo;
+	private JTextField DataNascimento;
+	private JTextField CodigoFunc;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AdDependente frame = new AdDependente();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public AdDependente() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Cadastro Dependente");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setBounds(122, 11, 187, 25);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setBounds(10, 55, 46, 14);
+		contentPane.add(lblNome);
+		
+		Nome = new JTextField();
+		Nome.setBounds(61, 52, 332, 20);
+		contentPane.add(Nome);
+		Nome.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Sexo: ");
+		lblNewLabel_1.setBounds(10, 78, 46, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		Sexo = new JTextField();
+		Sexo.setBounds(61, 75, 36, 20);
+		contentPane.add(Sexo);
+		Sexo.setColumns(10);
+		
+		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento:");
+		lblDataDeNascimento.setBounds(132, 78, 109, 14);
+		contentPane.add(lblDataDeNascimento);
+		
+		DataNascimento = new JTextField();
+		DataNascimento.setBounds(241, 75, 152, 20);
+		contentPane.add(DataNascimento);
+		DataNascimento.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Codigo Funcionario:");
+		lblNewLabel_2.setBounds(10, 103, 102, 14);
+		contentPane.add(lblNewLabel_2);
+		
+		CodigoFunc = new JTextField();
+		CodigoFunc.setBounds(111, 100, 281, 20);
+		contentPane.add(CodigoFunc);
+		CodigoFunc.setColumns(10);
+		
+		JButton btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Dependente d = new Dependente();
+				
+				d.setNome(Nome.getText());
+				d.setSexo(Sexo.getText());
+				d.setCodFunc(DataNascimento.getText());				
+				d.setCodFunc(Integer.parseInt(CodigoFunc.getText()));
+				
+				
+				DependenteDB dbd = new DependenteDB();
+				try {
+					dbd.insereDependente(d);;
+					JOptionPane.showMessageDialog(null, "Dependente Inserido Com sucesso!!!");
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "ERRO: "+e1.getMessage());
+				}	
+				
+			}
+		});
+		btnFinalizar.setBounds(335, 218, 89, 23);
+		contentPane.add(btnFinalizar);
+		
+	}
+}

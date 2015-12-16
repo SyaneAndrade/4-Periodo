@@ -9,8 +9,8 @@ public class Conexao {
 		Class.forName("org.postgresql.Driver");
 		
 		String url= "jdbc:postgresql://localhost:5432/Emissora";
-		String user= "******";
-		String password= "*****";
+		String user= "postgres";
+		String password= "211091";
 		
 		Connection connection = DriverManager.getConnection(url, user, password);
 		return connection;

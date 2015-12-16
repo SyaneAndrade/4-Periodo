@@ -1,0 +1,176 @@
+import java.awt.BorderLayout;
+import java.util.Calendar;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.Date;
+import java.awt.event.ActionEvent;
+
+public class CadastroFunc extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField Nome;
+	private JTextField Data;
+	private JTextField Tel;
+	private JTextField Cod;
+	private JTextField Sal;
+	private JTextField CNPJ;
+	
+	public void fechar(){
+		
+		this.setVisible(false);
+	}
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CadastroFunc frame = new CadastroFunc();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public CadastroFunc() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblCadastroCliente = new JLabel("Cadastro Funcionario");
+		lblCadastroCliente.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCadastroCliente.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		lblCadastroCliente.setBounds(153, 11, 148, 23);
+		contentPane.add(lblCadastroCliente);
+		
+		JLabel lblNewLabel = new JLabel("Nome:");
+		lblNewLabel.setBounds(10, 43, 46, 14);
+		contentPane.add(lblNewLabel);
+		
+		Nome = new JTextField();
+		Nome.setBounds(62, 40, 350, 20);
+		contentPane.add(Nome);
+		Nome.setColumns(10);
+		
+		JLabel lblDataNascimento = new JLabel("Endereco: ");
+		lblDataNascimento.setBounds(10, 68, 90, 14);
+		contentPane.add(lblDataNascimento);
+		
+		Data = new JTextField();
+		Data.setBounds(62, 65, 350, 20);
+		contentPane.add(Data);
+		Data.setColumns(10);
+		
+		JLabel lblTelefone = new JLabel("Telefone:");
+		lblTelefone.setBounds(10, 93, 46, 14);
+		contentPane.add(lblTelefone);
+		
+		Tel = new JTextField();
+		Tel.setBounds(62, 93, 118, 20);
+		contentPane.add(Tel);
+		Tel.setColumns(10);
+		
+		JLabel lblCodigo = new JLabel("Codigo:");
+		lblCodigo.setBounds(203, 96, 46, 14);
+		contentPane.add(lblCodigo);
+	
+		Cod = new JTextField();
+		Cod.setBounds(247, 90, 46, 20);
+		contentPane.add(Cod);
+		Cod.setColumns(10);
+		Cod.getText();
+
+		JLabel lblNewLabel_1 = new JLabel("Salario:");
+		lblNewLabel_1.setBounds(10, 118, 46, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		Sal = new JTextField();
+		Sal.setBounds(62, 118, 86, 20);
+		contentPane.add(Sal);
+		Sal.setColumns(10);
+		
+		JLabel lblCnpj = new JLabel("Emissora:");
+		lblCnpj.setBounds(182, 118, 46, 14);
+		contentPane.add(lblCnpj);
+		
+		CNPJ = new JTextField();
+		CNPJ.setBounds(244, 115, 128, 20);
+		contentPane.add(CNPJ);
+		CNPJ.setColumns(10);
+		CNPJ.setText("61.580.217/0001-47");
+		
+		JButton btnDependente = new JButton("Dependente");
+		btnDependente.setBounds(0, 218, 118, 23);
+		contentPane.add(btnDependente);
+		
+		
+		JButton btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Funcionario f = new Funcionario();
+				
+				f.setNome(Nome.getText());
+				f.setEndereco(Endereço.getText());
+				f.setTelefone(Telefone.getText());
+				f.setNome(Nome.getText());
+				f.setCodFunc(Codigo);
+				f.setSobrenome(Sobrenome.getText());
+				
+				//convertendo uma string para o tipo calendario para poder encaixar no banco
+				Calendar calendar = Calendar.getInstance();
+				calendar.set(Integer.parseInt(Data.getText().split("/")[2]),Integer.parseInt(Data.getText().split("/")[1]), Integer.parseInt(Data.getText().split("/")[0]));
+				f.setDataNasc(calendar);
+				
+				f.setCPF(Cpf.getText());
+				f.setRua(Rua.getText());
+				f.setNum(Integer.parseInt(Num.getText()));
+				f.setBairro(Bairro.getText());
+				f.setComplemento(Comp.getText());
+				f.setCep(Cep.getText());
+				f.setCidade(Cid.getText());
+				f.setEstado(Est.getText());
+				f.setTel(Tel.getText());
+				f.setCodigo(Integer.parseInt(Cod.getText()));
+				f.setCodDep(Integer.parseInt(Ger.getText()));
+				f.setCnpjEmp(CNPJ.getText());
+				f.setSal(Float.parseFloat(Sal.getText()));
+				
+				FuncionarioDB fdb = new FuncionarioDB();
+				try {
+					fdb.inserirFuncionario(f);
+					JOptionPane.showMessageDialog(null, "Funcionario Inseridos Com sucesso!!!");
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "ERRO: "+e1.getMessage());
+				}	
+				
+			}
+		});
+		btnFinalizar.setBounds(335, 218, 89, 23);
+		contentPane.add(btnFinalizar);
+		
+	}
+}
