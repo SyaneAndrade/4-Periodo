@@ -115,11 +115,10 @@ public class AdDependente extends JFrame {
 				
 				SimpleDateFormat a = new SimpleDateFormat("DD-MM-YYYY");
 				 try {
-					 	System.out.println(DataNascimento.getText());
 			            Date date = a.parse(DataNascimento.getText());
 			            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 			            d.setDataNascimento(sqlDate); 
-			            System.out.println(DataNascimento.getText());
+			           // System.out.println(DataNascimento.getText());
 			        } catch (ParseException e4) {
 			            e4.printStackTrace();
 			        }

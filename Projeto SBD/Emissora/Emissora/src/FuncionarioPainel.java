@@ -5,7 +5,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
 
 import java.awt.event.ActionEvent;
@@ -92,7 +94,26 @@ public class FuncionarioPainel extends JFrame {
 		btnNewButton_3.setBounds(131, 174, 177, 23);
 		contentPane.add(btnNewButton_3);
 		
-		JButton btnNewButton_4 = new JButton("Atualiza Cadastro");
+		JButton btnNewButton_4 = new JButton("Menu Inicial");
+		
+		btnNewButton_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					MenuInicial frame = new MenuInicial();
+					frame.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+				
+			}
+		});
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//eu.setVisible(false);
+				fechar();
+			}
+		});
 		btnNewButton_4.setBounds(131, 210, 177, 23);
 		contentPane.add(btnNewButton_4);
 	}

@@ -1,0 +1,70 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
+public class JDepartamentos extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JDepartamentos frame = new JDepartamentos();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public JDepartamentos() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		
+		JLabel lblMenuDepartamento = new JLabel("Menu Departamento");
+		lblMenuDepartamento.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMenuDepartamento.setBounds(157, 11, 154, 25);
+		contentPane.add(lblMenuDepartamento);
+		
+		JButton btnCadastro = new JButton("Cadastro");
+		btnCadastro.setBounds(157, 72, 139, 23);
+		contentPane.add(btnCadastro);
+		
+		JButton btnTodosOsDepartamentos = new JButton("Departamentos");
+		btnTodosOsDepartamentos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnTodosOsDepartamentos.setBounds(157, 114, 139, 23);
+		contentPane.add(btnTodosOsDepartamentos);
+		
+		JButton btnNewButton = new JButton("MenuInicial");
+		btnNewButton.setBounds(157, 227, 139, 23);
+		contentPane.add(btnNewButton);
+	}
+
+}

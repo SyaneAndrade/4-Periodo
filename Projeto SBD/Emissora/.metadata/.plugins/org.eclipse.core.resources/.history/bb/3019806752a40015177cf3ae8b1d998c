@@ -1,0 +1,99 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+
+import java.awt.Font;
+
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+
+public class JProjetos extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JProjetos frame = new JProjetos();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	public void fechar(){
+		
+		this.setVisible(false);
+		
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public JProjetos() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		
+		JLabel lblMenuProjetos = new JLabel("Menu Projetos");
+		lblMenuProjetos.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMenuProjetos.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMenuProjetos.setBounds(156, 11, 139, 22);
+		contentPane.add(lblMenuProjetos);
+		
+		JButton btnCadastro = new JButton("Cadastro");
+		
+		btnCadastro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//bntVoltar.setVisible(false);
+				fechar();
+			}
+		});
+		
+		btnCadastro.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					CadastraProjetos frame = new CadastraProjetos();
+					frame.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+				
+			}
+		});
+		btnCadastro.setBounds(181, 61, 89, 23);
+		contentPane.add(btnCadastro);
+		
+		JButton btnProjetos = new JButton("Projetos");
+		btnProjetos.setBounds(181, 95, 89, 23);
+		contentPane.add(btnProjetos);
+		
+		JButton btnNewButton = new JButton("MenuInicial");
+		btnNewButton.setBounds(181, 227, 89, 23);
+		contentPane.add(btnNewButton);
+	}
+
+}

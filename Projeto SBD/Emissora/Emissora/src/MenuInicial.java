@@ -65,15 +65,6 @@ public class MenuInicial extends JFrame {
 		
 		JButton btnNewButton = new JButton("Funcionario");
 		
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnNewButton.setBounds(161, 41, 134, 23);
-		contentPane.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Cliente");
-		
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -93,27 +84,102 @@ public class MenuInicial extends JFrame {
 			}
 		});
 		
+		btnNewButton.setBounds(161, 41, 134, 23);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Cliente");
+		
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					JCliente frame = new JCliente();
+					frame.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+				
+			}
+		});
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//eu.setVisible(false);
+				fechar();
+			}
+		});
+		
 		btnNewButton_1.setBounds(161, 75, 134, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Servicos e Canais");
+		
+		btnNewButton_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					JServico frame = new JServico();
+					frame.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+				
+			}
+		});
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//eu.setVisible(false);
+				fechar();
+			}
+		});
+		
 		btnNewButton_2.setBounds(161, 109, 134, 23);
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Departamentos");
+		
+		btnNewButton_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					JDepartamentos frame = new JDepartamentos();
+					frame.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+				
+			}
+		});
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//eu.setVisible(false);
+				fechar();
+			}
+		});
 		btnNewButton_3.setBounds(161, 143, 134, 23);
 		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Projetos");
+		
+		btnNewButton_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					JProjetos frame = new JProjetos();
+					frame.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+				
+			}
+		});
 		btnNewButton_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
+				//eu.setVisible(false);
+				fechar();
 			}
 		});
 		btnNewButton_4.setBounds(161, 177, 134, 23);
 		contentPane.add(btnNewButton_4);
 		
-		JButton btnOutrasConsultas = new JButton("Outras Consultas");
-		btnOutrasConsultas.setBounds(161, 211, 134, 23);
-		contentPane.add(btnOutrasConsultas);
 	}
 }

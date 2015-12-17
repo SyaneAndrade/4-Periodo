@@ -1,0 +1,98 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+
+public class CadastraDepartamento extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CadastraDepartamento frame = new CadastraDepartamento();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public CadastraDepartamento() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		
+		JLabel lblCadrasto = new JLabel("Cadastro Departamento");
+		lblCadrasto.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblCadrasto.setBounds(144, 11, 183, 25);
+		contentPane.add(lblCadrasto);
+		
+		JLabel lblNome = new JLabel("Nome: ");
+		lblNome.setBounds(10, 47, 53, 14);
+		contentPane.add(lblNome);
+		
+		textField = new JTextField();
+		textField.setBounds(94, 44, 330, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Informacao: ");
+		lblNewLabel.setBounds(10, 83, 78, 14);
+		contentPane.add(lblNewLabel);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(94, 80, 330, 20);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblCodigo = new JLabel("Codigo: ");
+		lblCodigo.setBounds(10, 122, 46, 14);
+		contentPane.add(lblCodigo);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(93, 119, 104, 20);
+		contentPane.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JLabel lblEmissora = new JLabel("Emissora: ");
+		lblEmissora.setBounds(207, 122, 78, 14);
+		contentPane.add(lblEmissora);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(288, 119, 136, 20);
+		contentPane.add(textField_3);
+		textField_3.setColumns(10);
+		
+		JButton btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.setBounds(301, 213, 89, 23);
+		contentPane.add(btnFinalizar);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setBounds(35, 213, 89, 23);
+		contentPane.add(btnVoltar);
+	}
+
+}
