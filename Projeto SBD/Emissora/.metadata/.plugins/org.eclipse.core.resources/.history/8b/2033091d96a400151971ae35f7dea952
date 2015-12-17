@@ -1,30 +1,29 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.SQLException;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.List;
 import java.awt.Toolkit;
 import java.awt.Color;
 
 
-public class JListarProjetos extends JFrame {
+public class JListarCliente extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -37,7 +36,7 @@ public class JListarProjetos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JListarProjetos frame = new JListarProjetos();
+					JListarCliente frame = new JListarCliente();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,10 +48,9 @@ public class JListarProjetos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public JListarProjetos() {
+	public JListarCliente() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Syane Andrade\\Documents\\GitHub\\4-Periodo\\Projeto SBD\\Emissora\\Emissora\\admin_icon.png"));
-		
-		setTitle("Listar Projetos");
+		setTitle("Listar Cliente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 637, 437);
 		contentPane = new JPanel();
@@ -62,7 +60,7 @@ public class JListarProjetos extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblPesquisar = new JLabel("Pesquisar");
-		lblPesquisar.setBounds(10, 11, 107, 14);
+		lblPesquisar.setBounds(10, 11, 46, 14);
 		contentPane.add(lblPesquisar);
 		
 		Pesquisa = new JTextField();
@@ -71,14 +69,14 @@ public class JListarProjetos extends JFrame {
 		Pesquisa.setColumns(10);
 		
 		
-//		Instanciando todos os Projetoss
-        ProjetosDB pdb = new ProjetosDB();
+//		Instanciando todos os Clientes
+        ClienteDB cdb = new ClienteDB();
         
         try {
-			List<Projetos> Projetos = pdb.listarProjetos();
+			List<Cliente> clientes = cdb.listarCliente();
 			
-			for (Projetos p: Projetos){
-				System.out.println(p.getNome());
+			for (Cliente c: clientes){
+				System.out.println(c.getNomeCli());
 			}
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -90,7 +88,7 @@ public class JListarProjetos extends JFrame {
         
         
 //        Colunas
-        String [] colunas = {"Codigo","Nome","Data","Info Projeto","COD Departamento"};
+        String [] colunas = {"Codigo","Nome","Emissora","Telefone", "Endereço"};
         Object [][] dados = {};
         
         
@@ -109,13 +107,10 @@ public class JListarProjetos extends JFrame {
 		
         DefaultTableModel val = (DefaultTableModel) table.getModel();
         try {
-        	List<Projetos> Projetos = pdb.listarProjetos();
+        	List<Cliente> clientes = cdb.listarCliente();
 			
-			for (Projetos p: Projetos){
-//				{"Codigo","Nome","Data","Info Projeto","COD Departamento"}
-				Format formatter = new SimpleDateFormat("dd/MM/yyyy");
-				String data = formatter.format(p.getData());
-				val.addRow(new String[]{p.getCodProj(),p.getNome(),data,p.getInfoProj(),p.getCodDep()});
+			for (Cliente c: clientes){
+				val.addRow(new String[]{c.getCodCli(),c.getNomeCli(),c.getCodEmi(),c.getTelefones(),c.getEndereco()});
 			}
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -131,15 +126,15 @@ public class JListarProjetos extends JFrame {
             public void valueChanged(ListSelectionEvent event) {
                 if (table.getSelectedRow() > -1) {
                     // print first column value from selected row
-//                    System.out.println(table.getValueAt(table.getSelectedRow(), 0).toString());
-//                    Projetos cupdate = new Projetos();
-////                    {"Codigo","Nome","Emissora","Salario","Telefone", "Endereço"}
-//                    
-//                    String nome = table.getValueAt(table.getSelectedRow(), 1).toString();
-//                    String codEmi = table.getValueAt(table.getSelectedRow(), 2).toString();
-//                    Float salario = Float.parseFloat(table.getValueAt(table.getSelectedRow(), 3).toString());
-//                    String telefone = table.getValueAt(table.getSelectedRow(), 4).toString();
-//                    String endereco = table.getValueAt(table.getSelectedRow(), 5).toString();
+                    System.out.println(table.getValueAt(table.getSelectedRow(), 0).toString());
+                    Cliente cupdate = new Cliente();
+//                    {"Codigo","Nome","Emissora","Salario","Telefone", "Endereço"}
+                    
+                    String nome = table.getValueAt(table.getSelectedRow(), 1).toString();
+                    String codEmi = table.getValueAt(table.getSelectedRow(), 2).toString();
+                    Float salario = Float.parseFloat(table.getValueAt(table.getSelectedRow(), 3).toString());
+                    String telefone = table.getValueAt(table.getSelectedRow(), 4).toString();
+                    String endereco = table.getValueAt(table.getSelectedRow(), 5).toString();
                     
 //                    cupdate.setCodFunc(Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
 //                    cupdate.setNome(nome);
@@ -148,7 +143,7 @@ public class JListarProjetos extends JFrame {
 //                    cupdate.setTelefone(telefone);
 //                    cupdate.setEndereco(endereco);
                     
-//                    JUpdateProjetos updateFrame = new JUpdateProjetos(cupdate);
+//                    JUpdateCliente updateFrame = new JUpdateCliente(cupdate);
 //                    updateFrame.setVisible(true);
                     
                     
@@ -185,7 +180,7 @@ public class JListarProjetos extends JFrame {
 				//eu.setVisible(false);
 				setVisible(false);
 				try {
-					JProjetos frame = new JProjetos();
+					JCliente frame = new JCliente();
 					frame.setVisible(true);
 				} catch (Exception j) {
 					j.printStackTrace();
@@ -204,13 +199,11 @@ public class JListarProjetos extends JFrame {
 		            DefaultTableModel val = (DefaultTableModel) table.getModel();
 		            val.setRowCount(0);
 		            try {
-		    			List<Projetos> Projetos = pdb.listarProjetosNome(Pesquisa.getText());
+		    			List<Cliente> clientes = cdb.listarClienteNome(Pesquisa.getText());
 		    			
-		    			for (Projetos p: Projetos){
-//		    				{"Codigo","Nome","Data","Info Projeto","COD Departamento"}
-		    				Format formatter = new SimpleDateFormat("DD/MM/YYYY");
-		    				String data = formatter.format(p.getData());
-		    				val.addRow(new String[]{p.getCodProj(),p.getNome(),data,p.getInfoProj(),p.getCodDep()});
+		    			for (Cliente c: clientes){
+		    				
+		    				val.addRow(new String[]{c.getCodCli(),c.getNomeCli(),c.getCodEmi(),c.getTelefones(),c.getEndereco()});
 		    			}
 		    		} catch (ClassNotFoundException e1) {
 		    			// TODO Auto-generated catch block
@@ -225,5 +218,4 @@ public class JListarProjetos extends JFrame {
 		    }
 		});
 	}
-
 }

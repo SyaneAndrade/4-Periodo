@@ -1,31 +1,34 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.SQLException;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.List;
 import java.awt.Toolkit;
 import java.awt.Color;
 
 
-public class JListarProjetos extends JFrame {
+public class JListarServico extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
 	private JTextField Pesquisa;
@@ -37,7 +40,7 @@ public class JListarProjetos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JListarProjetos frame = new JListarProjetos();
+					JListarServico frame = new JListarServico();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,10 +52,9 @@ public class JListarProjetos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public JListarProjetos() {
+	public JListarServico() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Syane Andrade\\Documents\\GitHub\\4-Periodo\\Projeto SBD\\Emissora\\Emissora\\admin_icon.png"));
-		
-		setTitle("Listar Projetos");
+		setTitle("Listar Servico");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 637, 437);
 		contentPane = new JPanel();
@@ -62,7 +64,7 @@ public class JListarProjetos extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblPesquisar = new JLabel("Pesquisar");
-		lblPesquisar.setBounds(10, 11, 107, 14);
+		lblPesquisar.setBounds(10, 11, 46, 14);
 		contentPane.add(lblPesquisar);
 		
 		Pesquisa = new JTextField();
@@ -71,14 +73,14 @@ public class JListarProjetos extends JFrame {
 		Pesquisa.setColumns(10);
 		
 		
-//		Instanciando todos os Projetoss
-        ProjetosDB pdb = new ProjetosDB();
+//		Instanciando todos os Servicos
+        ServicosCanalTVDB sdb = new ServicosCanalTVDB();
         
         try {
-			List<Projetos> Projetos = pdb.listarProjetos();
+			List<ServicosCanalTV> Servicos = sdb.listarServicosCanalTV();
 			
-			for (Projetos p: Projetos){
-				System.out.println(p.getNome());
+			for (ServicosCanalTV s: Servicos){
+				System.out.println(s.getNomeCanal());
 			}
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -90,7 +92,7 @@ public class JListarProjetos extends JFrame {
         
         
 //        Colunas
-        String [] colunas = {"Codigo","Nome","Data","Info Projeto","COD Departamento"};
+        String [] colunas = {"N. Canal","Nome Canal","Emissora","Info Canal"};
         Object [][] dados = {};
         
         
@@ -109,13 +111,11 @@ public class JListarProjetos extends JFrame {
 		
         DefaultTableModel val = (DefaultTableModel) table.getModel();
         try {
-        	List<Projetos> Projetos = pdb.listarProjetos();
+        	List<ServicosCanalTV> Servicos = sdb.listarServicosCanalTV();
 			
-			for (Projetos p: Projetos){
-//				{"Codigo","Nome","Data","Info Projeto","COD Departamento"}
-				Format formatter = new SimpleDateFormat("dd/MM/yyyy");
-				String data = formatter.format(p.getData());
-				val.addRow(new String[]{p.getCodProj(),p.getNome(),data,p.getInfoProj(),p.getCodDep()});
+			for (ServicosCanalTV s: Servicos){
+//		        {"N. Canal","Nome Canal","Emissora","Info Canal"};
+				val.addRow(new String[]{Integer.toString(s.getNumCanal()),s.getNomeCanal(),s.getCodEmi(),s.getInfoCanal()});
 			}
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -131,24 +131,24 @@ public class JListarProjetos extends JFrame {
             public void valueChanged(ListSelectionEvent event) {
                 if (table.getSelectedRow() > -1) {
                     // print first column value from selected row
-//                    System.out.println(table.getValueAt(table.getSelectedRow(), 0).toString());
-//                    Projetos cupdate = new Projetos();
-////                    {"Codigo","Nome","Emissora","Salario","Telefone", "Endereço"}
-//                    
-//                    String nome = table.getValueAt(table.getSelectedRow(), 1).toString();
-//                    String codEmi = table.getValueAt(table.getSelectedRow(), 2).toString();
-//                    Float salario = Float.parseFloat(table.getValueAt(table.getSelectedRow(), 3).toString());
-//                    String telefone = table.getValueAt(table.getSelectedRow(), 4).toString();
-//                    String endereco = table.getValueAt(table.getSelectedRow(), 5).toString();
+                    System.out.println(table.getValueAt(table.getSelectedRow(), 0).toString());
+                    ServicosCanalTV supdate = new ServicosCanalTV();
+//                    {"Codigo","Nome","Emissora","Salario","Telefone", "Endereço"}
                     
-//                    cupdate.setCodFunc(Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
-//                    cupdate.setNome(nome);
-//                    cupdate.setCodEmi(codEmi);
-//                    cupdate.setSalario(salario);
-//                    cupdate.setTelefone(telefone);
-//                    cupdate.setEndereco(endereco);
+                    String nome = table.getValueAt(table.getSelectedRow(), 1).toString();
+                    String codEmi = table.getValueAt(table.getSelectedRow(), 2).toString();
+                    Float salario = Float.parseFloat(table.getValueAt(table.getSelectedRow(), 3).toString());
+                    String telefone = table.getValueAt(table.getSelectedRow(), 4).toString();
+                    String endereco = table.getValueAt(table.getSelectedRow(), 5).toString();
                     
-//                    JUpdateProjetos updateFrame = new JUpdateProjetos(cupdate);
+//                    supdate.setCodFunc(Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
+//                    supdate.setNome(nome);
+//                    supdate.setCodEmi(codEmi);
+//                    supdate.setSalario(salario);
+//                    supdate.setTelefone(telefone);
+//                    supdate.setEndereco(endereco);
+                    
+//                    JUpdateServico updateFrame = new JUpdateServico(supdate);
 //                    updateFrame.setVisible(true);
                     
                     
@@ -185,7 +185,7 @@ public class JListarProjetos extends JFrame {
 				//eu.setVisible(false);
 				setVisible(false);
 				try {
-					JProjetos frame = new JProjetos();
+					JServico frame = new JServico();
 					frame.setVisible(true);
 				} catch (Exception j) {
 					j.printStackTrace();
@@ -204,13 +204,11 @@ public class JListarProjetos extends JFrame {
 		            DefaultTableModel val = (DefaultTableModel) table.getModel();
 		            val.setRowCount(0);
 		            try {
-		    			List<Projetos> Projetos = pdb.listarProjetosNome(Pesquisa.getText());
+		    			List<ServicosCanalTV> Servicos = sdb.listarServicosCanalTVNome(Pesquisa.getText());
 		    			
-		    			for (Projetos p: Projetos){
-//		    				{"Codigo","Nome","Data","Info Projeto","COD Departamento"}
-		    				Format formatter = new SimpleDateFormat("DD/MM/YYYY");
-		    				String data = formatter.format(p.getData());
-		    				val.addRow(new String[]{p.getCodProj(),p.getNome(),data,p.getInfoProj(),p.getCodDep()});
+		    			for (ServicosCanalTV s: Servicos){
+		    				
+		    				val.addRow(new String[]{Integer.toString(s.getNumCanal()),s.getNomeCanal(),s.getCodEmi(),s.getInfoCanal()});
 		    			}
 		    		} catch (ClassNotFoundException e1) {
 		    			// TODO Auto-generated catch block
@@ -225,5 +223,4 @@ public class JListarProjetos extends JFrame {
 		    }
 		});
 	}
-
 }

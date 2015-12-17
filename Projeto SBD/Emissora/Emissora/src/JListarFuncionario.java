@@ -188,7 +188,7 @@ public class JListarFuncionario extends JFrame {
 		Pesquisa.setColumns(10);
 		
 		JLabel lblPesquisar = new JLabel("Pesquisar");
-		lblPesquisar.setBounds(23, 14, 46, 14);
+		lblPesquisar.setBounds(23, 14, 76, 14);
 		contentPane.add(lblPesquisar);
 		
 		Pesquisa.addActionListener(new java.awt.event.ActionListener() {

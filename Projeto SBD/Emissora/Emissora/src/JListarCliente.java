@@ -60,7 +60,7 @@ public class JListarCliente extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblPesquisar = new JLabel("Pesquisar");
-		lblPesquisar.setBounds(10, 11, 46, 14);
+		lblPesquisar.setBounds(10, 11, 89, 14);
 		contentPane.add(lblPesquisar);
 		
 		Pesquisa = new JTextField();
