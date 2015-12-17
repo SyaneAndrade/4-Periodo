@@ -20,6 +20,8 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 //import java.util.Date;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
+import java.awt.Color;
 
 public class CadastroFunc extends JFrame {
 
@@ -60,9 +62,11 @@ public class CadastroFunc extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastroFunc() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Syane Andrade\\Documents\\GitHub\\4-Periodo\\Projeto SBD\\Emissora\\Emissora\\admin_icon.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);

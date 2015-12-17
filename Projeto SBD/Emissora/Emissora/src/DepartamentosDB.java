@@ -45,5 +45,27 @@ public class DepartamentosDB {
 		return lstDepartamentos;
 	}
 	
+	public List<Departamentos> listarDepartamentosNome(String nome) throws ClassNotFoundException, SQLException{
+		
+		List<Departamentos> lstDepartamentos = new ArrayList<Departamentos>();
+		String sql =  "SELECT * FROM Departamentos WHERE nomedep LIKE '%"+nome+"%';";
+		PreparedStatement ps = Conexao.connection().prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()){
+			
+			Departamentos objDepartamentos = new Departamentos();
+			
+			objDepartamentos.setCodEmi(rs.getString("CodEmi"));
+			objDepartamentos.setCodDep(rs.getString("CodDep"));
+			objDepartamentos.setNomeDep(rs.getString("NomeDep"));
+			objDepartamentos.setInfoDep(rs.getString("InfoDep"));
+			
+			lstDepartamentos.add(objDepartamentos);		
+		}
+		ps.close();
+		Conexao.connection().close();
+		return lstDepartamentos;
+	}
+	
 	
 }

@@ -1,0 +1,130 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
+
+public class JListarFuncionario extends JFrame {
+
+	private JPanel contentPane;
+	private JTable table;
+	private JTextField Pesquisa;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JListarFuncionario frame = new JListarFuncionario();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public JListarFuncionario() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+//		
+		btnVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				try {
+					FuncionarioPainel frame = new FuncionarioPainel();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+//		btnVoltar.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				//eu.setVisible(false);
+//				this.setVisible(false);
+//			}
+//		});	
+//		
+		
+		btnVoltar.setBounds(10, 227, 89, 23);
+		contentPane.add(btnVoltar);
+		
+		
+//		Instanciando todos os funcionarios
+        FuncionarioDB fdb = new FuncionarioDB();
+        
+        try {
+			List<Funcionario> funcs = fdb.listarFuncionario();
+			
+			for (Funcionario f: funcs){
+				System.out.println(f.getNome());
+			}
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	
+        
+        
+//        Colunas
+        String [] colunas = {"Codigo","Nome","Emissora","Salario","Telefone", "Endereço"};
+        Object [][] dados = { {"Ana Monteiro", "48 9923-7898", "ana.monteiro@gmail.com","1","2","3"}, {"João da Silva", "48 8890-3345", "joaosilva@hotmail.com","1","2","3"}, {"Pedro Cascaes", "48 9870-5634", "pedrinho@gmail.com","1","2","3"} };
+        
+//
+		
+		
+		JTable table = new JTable(dados,colunas);
+		table.setBounds(34, 208, 390, -166);
+		contentPane.add(table);
+		
+		Pesquisa = new JTextField();
+		Pesquisa.setBounds(10, 11, 414, 20);
+		contentPane.add(Pesquisa);
+		Pesquisa.setColumns(10);
+		
+		Pesquisa.addActionListener(new java.awt.event.ActionListener() {
+		    public void actionPerformed(java.awt.event.ActionEvent e) {
+
+		            System.out.println(Pesquisa.getText());
+
+		            String [] colunas = {"Nome", "Telefone", "Email"};
+		            Object [][] dados = { {"Ana Monteiro", "48 9923-7898", "ana.monteiro@gmail.com"}, {"João da Silva", "48 8890-3345", "joaosilva@hotmail.com"}, {"Pedro Cascaes", "48 9870-5634", "pedrinho@gmail.com"} };
+		            JTable tabela = new JTable(dados, colunas);
+		    		table.setBounds(34, 208, 390, -166);
+		    		contentPane.add(table);
+		            
+		    }
+		});
+	}
+}

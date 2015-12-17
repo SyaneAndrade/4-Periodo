@@ -1,0 +1,185 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import java.awt.Font;
+
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.awt.Toolkit;
+
+
+public class CadastraProjeto extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1075326124607585700L;
+	private JPanel contentPane;
+	private JTextField Nome;
+	private JTextField Informacao;
+	private JTextField Data;
+	private JTextField Codigo;
+	private JTextField Emissora;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CadastraProjeto frame = new CadastraProjeto();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	public void fechar(){
+		
+		this.setVisible(false);
+		
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public CadastraProjeto() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Syane Andrade\\Documents\\GitHub\\4-Periodo\\Projeto SBD\\Emissora\\Emissora\\admin_icon.png"));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		
+		JLabel lblCadastroProjeto = new JLabel("Cadastro Projeto");
+		lblCadastroProjeto.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblCadastroProjeto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCadastroProjeto.setBounds(132, 11, 162, 30);
+		contentPane.add(lblCadastroProjeto);
+		
+		JLabel lblNome = new JLabel("Nome: ");
+		lblNome.setBounds(10, 72, 60, 23);
+		contentPane.add(lblNome);
+		
+		Nome = new JTextField();
+		Nome.setBounds(88, 73, 319, 20);
+		contentPane.add(Nome);
+		Nome.setColumns(10);
+		
+		JLabel lblInformacao = new JLabel("Informacao: ");
+		lblInformacao.setBounds(10, 102, 82, 14);
+		contentPane.add(lblInformacao);
+		
+		Informacao = new JTextField();
+		Informacao.setBounds(88, 99, 319, 20);
+		contentPane.add(Informacao);
+		Informacao.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Data: ");
+		lblNewLabel.setBounds(10, 127, 46, 14);
+		contentPane.add(lblNewLabel);
+		
+		Data = new JTextField();
+		Data.setBounds(88, 124, 118, 20);
+		contentPane.add(Data);
+		Data.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Codigo: ");
+		lblNewLabel_1.setBounds(225, 127, 46, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		Codigo = new JTextField();
+		Codigo.setBounds(271, 124, 136, 20);
+		contentPane.add(Codigo);
+		Codigo.setColumns(10);
+		
+		JLabel lblEmissoral = new JLabel("Departamento: ");
+		lblEmissoral.setBounds(10, 152, 60, 14);
+		contentPane.add(lblEmissoral);
+		
+		Emissora = new JTextField();
+		Emissora.setBounds(88, 149, 118, 20);
+		contentPane.add(Emissora);
+		Emissora.setColumns(10);
+		
+		JButton btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Projetos p = new Projetos();
+				
+				p.setNome(Nome.getText());
+				p.setCodDep(Emissora.getText());
+				p.setInfoProj(Informacao.getText());
+				p.setCodProj(Codigo.getText());
+				
+				SimpleDateFormat a = new SimpleDateFormat("DD-MM-YYYY");
+				 try {
+			            Date date = a.parse(Data.getText());
+			            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+			            p.setData(sqlDate); 
+			           // System.out.println(DataNascimento.getText());
+			        } catch (ParseException e4) {
+			            e4.printStackTrace();
+			        }       	
+		         			
+				ProjetosDB pbd = new ProjetosDB();
+				try {
+					pbd.insereProjetos(p);
+					JOptionPane.showMessageDialog(null, "Departamento Inserido Com sucesso!!!");
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "ERRO: "+e1.getMessage());
+				}	
+				
+			}
+		});
+		btnFinalizar.setBounds(318, 227, 89, 23);
+		contentPane.add(btnFinalizar);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//bntVoltar.setVisible(false);
+				fechar();
+			}
+		});
+		
+		btnVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					JProjetos frame = new JProjetos();
+					frame.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+				
+			}
+		});
+		
+		btnVoltar.setBounds(10, 227, 89, 23);
+		contentPane.add(btnVoltar);
+	}
+
+}

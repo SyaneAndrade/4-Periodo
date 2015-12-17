@@ -13,6 +13,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import java.awt.Toolkit;
+import java.awt.Color;
 
 
 public class JServico extends JFrame {
@@ -47,9 +49,11 @@ public class JServico extends JFrame {
 	 * Create the frame.
 	 */
 	public JServico() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Syane Andrade\\Documents\\GitHub\\4-Periodo\\Projeto SBD\\Emissora\\Emissora\\admin_icon.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
@@ -65,7 +69,7 @@ public class JServico extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//bntVoltar.setVisible(false);
-				fechar();
+//				fechar();
 			}
 		});
 		
@@ -75,6 +79,7 @@ public class JServico extends JFrame {
 				try {
 					CadastraServico frame = new CadastraServico();
 					frame.setVisible(true);
+					fechar();
 				} catch (Exception a) {
 					a.printStackTrace();
 				}
@@ -86,6 +91,13 @@ public class JServico extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnServicos = new JButton("Servicos");
+		btnServicos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JListarServico frame = new JListarServico();
+				setVisible(false);
+				frame.setVisible(true);
+			}
+		});
 		btnServicos.setBounds(175, 122, 89, 23);
 		contentPane.add(btnServicos);
 		

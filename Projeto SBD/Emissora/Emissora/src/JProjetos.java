@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
+import java.awt.Color;
 
 
 public class JProjetos extends JFrame {
@@ -50,9 +52,11 @@ public class JProjetos extends JFrame {
 	 * Create the frame.
 	 */
 	public JProjetos() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Syane Andrade\\Documents\\GitHub\\4-Periodo\\Projeto SBD\\Emissora\\Emissora\\admin_icon.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
@@ -88,6 +92,13 @@ public class JProjetos extends JFrame {
 		contentPane.add(btnCadastro);
 		
 		JButton btnProjetos = new JButton("Projetos");
+		btnProjetos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JListarProjetos frame = new JListarProjetos();
+				setVisible(false);
+				frame.setVisible(true);
+			}
+		});
 		btnProjetos.setBounds(156, 95, 132, 23);
 		contentPane.add(btnProjetos);
 		
@@ -96,7 +107,7 @@ public class JProjetos extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//bntVoltar.setVisible(false);
-				fechar();
+//				fechar();
 			}
 		});
 		
@@ -106,6 +117,7 @@ public class JProjetos extends JFrame {
 				try {
 					MenuInicial frame = new MenuInicial();
 					frame.setVisible(true);
+					setVisible(false);
 				} catch (Exception a) {
 					a.printStackTrace();
 				}

@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
 
 
 public class MenuInicial extends JFrame {
@@ -48,6 +49,7 @@ public class MenuInicial extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuInicial() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Syane Andrade\\Documents\\GitHub\\4-Periodo\\Projeto SBD\\Emissora\\Emissora\\admin_icon.png"));
 		//this.eu = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -94,6 +96,7 @@ public class MenuInicial extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					JCliente frame = new JCliente();
+					fechar();
 					frame.setVisible(true);
 				} catch (Exception a) {
 					a.printStackTrace();
@@ -104,7 +107,7 @@ public class MenuInicial extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//eu.setVisible(false);
-				fechar();
+//				fechar();
 			}
 		});
 		
@@ -119,6 +122,7 @@ public class MenuInicial extends JFrame {
 				try {
 					JServico frame = new JServico();
 					frame.setVisible(true);
+					fechar();
 				} catch (Exception a) {
 					a.printStackTrace();
 				}
@@ -128,7 +132,7 @@ public class MenuInicial extends JFrame {
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//eu.setVisible(false);
-				fechar();
+//				fechar();
 			}
 		});
 		
@@ -142,6 +146,7 @@ public class MenuInicial extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					JDepartamentos frame = new JDepartamentos();
+					fechar();
 					frame.setVisible(true);
 				} catch (Exception a) {
 					a.printStackTrace();
@@ -152,7 +157,7 @@ public class MenuInicial extends JFrame {
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//eu.setVisible(false);
-				fechar();
+//				fechar();
 			}
 		});
 		btnNewButton_3.setBounds(161, 143, 134, 23);
@@ -166,6 +171,8 @@ public class MenuInicial extends JFrame {
 				try {
 					JProjetos frame = new JProjetos();
 					frame.setVisible(true);
+					setVisible(false);
+				
 				} catch (Exception a) {
 					a.printStackTrace();
 				}
@@ -175,7 +182,7 @@ public class MenuInicial extends JFrame {
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//eu.setVisible(false);
-				fechar();
+//				fechar();
 			}
 		});
 		btnNewButton_4.setBounds(161, 177, 134, 23);

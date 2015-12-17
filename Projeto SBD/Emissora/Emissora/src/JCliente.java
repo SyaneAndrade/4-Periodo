@@ -11,6 +11,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.Toolkit;
+import java.awt.Color;
 
 
 public class JCliente extends JFrame {
@@ -45,9 +47,13 @@ public class JCliente extends JFrame {
 	 * Create the frame.
 	 */
 	public JCliente() {
+		setBackground(Color.WHITE);
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Syane Andrade\\Documents\\GitHub\\4-Periodo\\Projeto SBD\\Emissora\\Emissora\\admin_icon.png"));
+		setTitle("Menu Cliente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
@@ -83,11 +89,18 @@ public class JCliente extends JFrame {
 		
 		
 		JButton btnNewButton = new JButton("Ver todos");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JListarCliente frame = new JListarCliente();
+				setVisible(false);
+				frame.setVisible(true);
+			}
+		});
 		btnNewButton.setBounds(164, 108, 135, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnMenuInicial = new JButton("Menu Inicial");
-		btnMenuInicial.setBounds(164, 213, 119, 23);
+		btnMenuInicial.setBounds(164, 213, 135, 23);
 		contentPane.add(btnMenuInicial);
 		
 		btnMenuInicial.addActionListener(new ActionListener() {

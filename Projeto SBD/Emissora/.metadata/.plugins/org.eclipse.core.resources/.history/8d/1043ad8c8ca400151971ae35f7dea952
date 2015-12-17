@@ -1,0 +1,46 @@
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class ServicosCanalTVDB {
+	
+	public void insereServicoCanalTV(ServicosCanalTV objServicosCanalTV) throws ClassNotFoundException, SQLException {
+		//INSERT INTO ServicosCanalTV VALUES ( '1010',	1,	'Tv Escola',	'Informativo, educativo');	
+		String sql = "Insert into ServicosCanalTV values(?,?,?,?)";
+		
+		PreparedStatement ps = Conexao.connection().prepareStatement(sql);
+		ps.setString(1,objServicosCanalTV.getCodEmi());
+		ps.setInt(2,objServicosCanalTV.getNumCanal());
+		ps.setString(3, objServicosCanalTV.getNomeCanal());
+		ps.setString(4,objServicosCanalTV.getInfoCanal());
+		
+		ps.execute();
+		ps.close();
+		Conexao.connection().close();
+	}
+	
+	public List<ServicosCanalTV> listarServicosCanalTV() throws ClassNotFoundException, SQLException{
+			
+			List<ServicosCanalTV> lstServicosCanalTV = new ArrayList<ServicosCanalTV>();
+			String sql =  "SELECT * FROM ServicosCanalTV;";
+			PreparedStatement ps = Conexao.connection().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				
+				ServicosCanalTV objServicosCanalTV = new ServicosCanalTV();
+				
+				objServicosCanalTV.setCodEmi(rs.getString("CodEmi"));
+				objServicosCanalTV.setNumCanal(rs.getInt("NumCanal"));
+				objServicosCanalTV.setNomeCanal(rs.getString("NomeCanal"));
+				objServicosCanalTV.setInfoCanal(rs.getString("InfoCanal"));
+				
+				lstServicosCanalTV.add(objServicosCanalTV);		
+			}
+			ps.close();
+			Conexao.connection().close();
+			return lstServicosCanalTV;
+		}
+}

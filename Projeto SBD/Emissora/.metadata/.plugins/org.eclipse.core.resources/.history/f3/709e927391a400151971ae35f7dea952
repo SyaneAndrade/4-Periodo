@@ -1,0 +1,186 @@
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+
+public class MenuInicial extends JFrame {
+
+	public void fechar(){
+		this.setVisible(false);
+	}
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MenuInicial frame = new MenuInicial();
+					//frame.eu = frame;
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public MenuInicial() {
+		//this.eu = this;
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblMenuInicial = new JLabel("Menu Inicial");
+		lblMenuInicial.setFont(new Font("Arial Black", Font.BOLD, 16));
+		lblMenuInicial.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMenuInicial.setBounds(173, 0, 122, 30);
+		contentPane.add(lblMenuInicial);
+		
+		JButton btnNewButton = new JButton("Funcionario");
+		
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					FuncionarioPainel frame = new FuncionarioPainel();
+					frame.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+				
+			}
+		});
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//eu.setVisible(false);
+				fechar();
+			}
+		});
+		
+		btnNewButton.setBounds(161, 41, 134, 23);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Cliente");
+		
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					JCliente frame = new JCliente();
+					frame.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+				
+			}
+		});
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//eu.setVisible(false);
+				fechar();
+			}
+		});
+		
+		btnNewButton_1.setBounds(161, 75, 134, 23);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Servicos e Canais");
+		
+		btnNewButton_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					JServico frame = new JServico();
+					frame.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+				
+			}
+		});
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//eu.setVisible(false);
+				fechar();
+			}
+		});
+		
+		btnNewButton_2.setBounds(161, 109, 134, 23);
+		contentPane.add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("Departamentos");
+		
+		btnNewButton_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					JDepartamentos frame = new JDepartamentos();
+					frame.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+				
+			}
+		});
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//eu.setVisible(false);
+				fechar();
+			}
+		});
+		btnNewButton_3.setBounds(161, 143, 134, 23);
+		contentPane.add(btnNewButton_3);
+		
+		JButton btnNewButton_4 = new JButton("Projetos");
+		
+		btnNewButton_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					JProjetos frame = new JProjetos();
+					frame.setVisible(true);
+					setVisible(false);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+				
+			}
+		});
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//eu.setVisible(false);
+				fechar();
+			}
+		});
+		btnNewButton_4.setBounds(161, 177, 134, 23);
+		contentPane.add(btnNewButton_4);
+		
+	}
+}

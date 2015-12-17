@@ -14,6 +14,8 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.Toolkit;
+import java.awt.Color;
 
 
 public class CadastraCliente extends JFrame {
@@ -54,9 +56,11 @@ public class CadastraCliente extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastraCliente() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Syane Andrade\\Documents\\GitHub\\4-Periodo\\Projeto SBD\\Emissora\\Emissora\\admin_icon.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);

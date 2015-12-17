@@ -8,6 +8,7 @@ public class Main {
 	
 	private static Scanner a;
 
+	@SuppressWarnings("deprecation")
 	public static void main(String[] arg) throws ClassNotFoundException, SQLException{
 		
 		FuncionarioDB fdb = new FuncionarioDB();
@@ -25,6 +26,14 @@ public class Main {
 		List<Projetos> plist = new ArrayList<Projetos>();
 		List<ServicosCanalTV> slist = new ArrayList<ServicosCanalTV>();
 		List<Cliente> clist = new ArrayList<Cliente>();
+		
+		try {
+			MenuInicial frame = new MenuInicial();
+			frame.setVisible(true);
+		} catch (Exception a) {
+			a.printStackTrace();
+		}
+		
 		
 		a = new Scanner(System.in);
 		int aux;
@@ -105,7 +114,7 @@ public class Main {
 			}
 		}
 		}
-		
+
 	}
 }
 

@@ -48,4 +48,30 @@ public class ClienteDB {
 		Conexao.connection().close();
 		return lstCliente;
 	}
+	
+	
+	public List<Cliente> listarClienteNome(String nome) throws ClassNotFoundException, SQLException{
+		
+		List<Cliente> lstCliente = new ArrayList<Cliente>();
+		String sql =  "SELECT * FROM Cliente WHERE nomecli LIKE '%"+nome+"%';";
+		PreparedStatement ps = Conexao.connection().prepareStatement(sql);
+//		ps.setString(0, nome);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()){
+			
+			Cliente objCliente = new Cliente();
+			
+			objCliente.setCodEmi(rs.getString("CodEmi"));
+			objCliente.setCodCli(rs.getString("CodCli"));
+			objCliente.setNomeCli(rs.getString("NomeCli"));
+			objCliente.setEndereco(rs.getString("Endereco"));
+			objCliente.setTelefones(rs.getString("Telefones"));
+			
+			lstCliente.add(objCliente);	
+					
+		}
+		ps.close();
+		Conexao.connection().close();
+		return lstCliente;
+	}
 }

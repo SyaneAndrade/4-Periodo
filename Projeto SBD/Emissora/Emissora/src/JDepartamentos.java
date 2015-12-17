@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
+import java.awt.Color;
 
 
 public class JDepartamentos extends JFrame {
@@ -47,9 +49,12 @@ public class JDepartamentos extends JFrame {
 	 * Create the frame.
 	 */
 	public JDepartamentos() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Syane Andrade\\Documents\\GitHub\\4-Periodo\\Projeto SBD\\Emissora\\Emissora\\admin_icon.png"));
+		setTitle("Menu Departamento");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
@@ -87,6 +92,9 @@ public class JDepartamentos extends JFrame {
 		JButton btnTodosOsDepartamentos = new JButton("Departamentos");
 		btnTodosOsDepartamentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JListarDepartamentos frame = new JListarDepartamentos();
+				setVisible(false);
+				frame.setVisible(true);
 			}
 		});
 		btnTodosOsDepartamentos.setBounds(157, 114, 139, 23);

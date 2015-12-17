@@ -1,0 +1,91 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+
+public class JListarCliente extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JListarCliente frame = new JListarCliente();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public JListarCliente() {
+		setTitle("Listar Cliente");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 637, 437);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		
+		JLabel lblPesquisar = new JLabel("Pesquisar");
+		lblPesquisar.setBounds(10, 11, 46, 14);
+		contentPane.add(lblPesquisar);
+		
+		textField = new JTextField();
+		textField.setBounds(106, 8, 505, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+//		
+		btnVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+//				try {
+//					FuncionarioPainel frame = new FuncionarioPainel();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+			}
+		});
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//eu.setVisible(false);
+				setVisible(false);
+				try {
+					FuncionarioPainel frame = new FuncionarioPainel();
+					frame.setVisible(true);
+				} catch (Exception j) {
+					j.printStackTrace();
+				}
+			}
+		});	
+		btnVoltar.setBounds(10, 364, 89, 23);
+		contentPane.add(btnVoltar);
+	}
+}

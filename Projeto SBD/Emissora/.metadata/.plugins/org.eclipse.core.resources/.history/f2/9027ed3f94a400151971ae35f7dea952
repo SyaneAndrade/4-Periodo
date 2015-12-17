@@ -1,0 +1,162 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import javax.swing.JButton;
+import java.awt.Toolkit;
+
+
+public class CadastraServico extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField Nome;
+	private JTextField Informacao;
+	private JTextField Canal;
+	private JTextField Emissora;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CadastraServico frame = new CadastraServico();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	public void fechar(){
+		
+		this.setVisible(false);
+		
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public CadastraServico() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Syane Andrade\\Documents\\GitHub\\4-Periodo\\Projeto SBD\\Emissora\\Emissora\\admin_icon.png"));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		
+		JLabel lblCadastraServicos = new JLabel("Cadastra Servicos");
+		lblCadastraServicos.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblCadastraServicos.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCadastraServicos.setBounds(85, 11, 219, 36);
+		contentPane.add(lblCadastraServicos);
+		
+		JLabel lblNome = new JLabel("Nome: ");
+		lblNome.setBounds(10, 61, 46, 14);
+		contentPane.add(lblNome);
+		
+		Nome = new JTextField();
+		Nome.setBounds(85, 58, 339, 20);
+		contentPane.add(Nome);
+		Nome.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Informacao: ");
+		lblNewLabel.setBounds(10, 95, 70, 14);
+		contentPane.add(lblNewLabel);
+		
+		Informacao = new JTextField();
+		Informacao.setBounds(85, 92, 339, 20);
+		contentPane.add(Informacao);
+		Informacao.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Canal: ");
+		lblNewLabel_1.setBounds(10, 128, 58, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		Canal = new JTextField();
+		Canal.setBounds(84, 125, 99, 20);
+		contentPane.add(Canal);
+		Canal.setColumns(10);
+		
+		JLabel lblEmissora = new JLabel("Emissora: ");
+		lblEmissora.setBounds(222, 128, 63, 14);
+		contentPane.add(lblEmissora);
+		
+		Emissora = new JTextField();
+		Emissora.setBounds(295, 125, 129, 20);
+		contentPane.add(Emissora);
+		Emissora.setColumns(10);
+		
+		JButton btnFinalizar = new JButton("Finalizar");
+		
+		btnFinalizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ServicosCanalTV s = new ServicosCanalTV();
+				
+				s.setNomeCanal(Nome.getText());
+				s.setInfoCanal(Informacao.getText());
+				s.setNumCanal(Integer.parseInt(Canal.getText()));
+				s.setCodEmi(Emissora.getText());
+				   	
+		         			
+				ServicosCanalTVDB sbd = new ServicosCanalTVDB();
+				try {
+					sbd.insereServicoCanalTV(s);
+					JOptionPane.showMessageDialog(null, "Servico e Canal Inserido Com sucesso!!!");
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "ERRO: "+e1.getMessage());
+				}	
+				
+			}
+		});
+		
+		btnFinalizar.setBounds(335, 213, 89, 23);
+		contentPane.add(btnFinalizar);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//bntVoltar.setVisible(false);
+				fechar();
+			}
+		});
+		
+		btnVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					JServico frame = new JServico();
+					frame.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+				
+			}
+		});
+		
+		btnVoltar.setBounds(10, 213, 89, 23);
+		contentPane.add(btnVoltar);
+	}
+
+}

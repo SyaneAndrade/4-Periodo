@@ -16,6 +16,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.awt.Toolkit;
+import java.awt.Color;
 
 
 public class CadastraDepartamento extends JFrame {
@@ -48,15 +50,20 @@ public class CadastraDepartamento extends JFrame {
 	public void fechar(){
 		
 		this.setVisible(false);
+		JDepartamentos frame = new JDepartamentos();
+		frame.setVisible(true);
 	}
 
 	/**
 	 * Create the frame.
 	 */
 	public CadastraDepartamento() {
+		setBackground(Color.WHITE);
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Syane Andrade\\Documents\\GitHub\\4-Periodo\\Projeto SBD\\Emissora\\Emissora\\admin_icon.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);

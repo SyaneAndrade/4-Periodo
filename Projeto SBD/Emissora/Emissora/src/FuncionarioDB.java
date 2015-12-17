@@ -27,7 +27,7 @@ public class FuncionarioDB {
 
 	public void removeFuncionario(Funcionario objFuncionario) throws ClassNotFoundException, SQLException{
 	
-		String sql = "DELETE FROM Funcionario WHERE CodFunc id = ?;";
+		String sql = "DELETE FROM Funcionario WHERE CodFunc = ?;";
 		PreparedStatement ps = Conexao.connection().prepareStatement(sql);
 		ps.setInt(1,objFuncionario.getCodFunc());
 		ps.execute();
@@ -37,10 +37,12 @@ public class FuncionarioDB {
 	
 	public void alterarFuncionario(Funcionario objFuncionario) throws ClassNotFoundException, SQLException{
 		
-		String sql = "UPDATE Funcionario SET Endereco = ?, Telefone = ? WHERE codFunc = ?;";
+		String sql = "UPDATE Funcionario SET Endereco = ?, Salario = ?, Telefones = ? WHERE codFunc = ?;";
 		PreparedStatement ps = Conexao.connection().prepareStatement(sql);
 		ps.setString(1, objFuncionario.getEndereco());
-		ps.setString(2, objFuncionario.getTelefone());
+		ps.setFloat(2, objFuncionario.getSalario());
+		ps.setString(3, objFuncionario.getTelefone());
+		ps.setInt(4, objFuncionario.getCodFunc());
 		ps.execute();
 		ps.close();
 		Conexao.connection().close();
@@ -51,6 +53,32 @@ public class FuncionarioDB {
 		List<Funcionario> lstFuncionario = new ArrayList<Funcionario>();
 		String sql =  "SELECT * FROM Funcionario;";
 		PreparedStatement ps = Conexao.connection().prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()){
+			
+			Funcionario objFuncionario = new Funcionario();
+			
+			objFuncionario.setCodEmi(rs.getString("CodEmi"));
+			objFuncionario.setCodFunc(rs.getInt("CodFunc"));
+			objFuncionario.setNome(rs.getString("Nome"));
+			objFuncionario.setEndereco(rs.getString("Endereco"));
+			objFuncionario.setTelefone(rs.getString("Telefones"));
+			objFuncionario.setSalario(rs.getFloat("Salario"));
+			
+			lstFuncionario.add(objFuncionario);		
+		}
+		ps.close();
+		Conexao.connection().close();
+		return lstFuncionario;
+	}
+	
+	
+	public List<Funcionario> listarFuncionarioNome(String nome) throws ClassNotFoundException, SQLException{
+		
+		List<Funcionario> lstFuncionario = new ArrayList<Funcionario>();
+		String sql =  "SELECT * FROM Funcionario WHERE nome LIKE '%"+nome+"%';";
+		PreparedStatement ps = Conexao.connection().prepareStatement(sql);
+//		ps.setString(0, nome);
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()){
 			

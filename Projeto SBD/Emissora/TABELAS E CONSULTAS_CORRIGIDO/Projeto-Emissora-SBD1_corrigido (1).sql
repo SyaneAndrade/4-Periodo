@@ -63,6 +63,7 @@ CREATE TABLE Funcionario(
 
 	CONSTRAINT Emissoraffk FOREIGN KEY(CodEmi)
 	REFERENCES Emissora(CodEmi)
+	ON DELETE CASCADE
 );
 
 CREATE TABLE Tecnicos (
@@ -103,7 +104,7 @@ CREATE TABLE Dependentes (
 	DataNascimento date,     /*#tirei idade e o relacao*/
 
 	CONSTRAINT Dependentes_fk FOREIGN KEY (CodFunc)
-	REFERENCES Funcionario(CodFunc),
+	REFERENCES Funcionario(CodFunc) ON DELETE CASCADE,
 	CONSTRAINT Dependentes_pk PRIMARY KEY (CodFunc,Nome)
 );
 

@@ -46,4 +46,28 @@ public class ProjetosDB {
 		Conexao.connection().close();
 		return lstProjetos;
 	}
+	
+
+	public List<Projetos> listarProjetosNome(String nome) throws ClassNotFoundException, SQLException{
+		
+		List<Projetos> lstProjetos = new ArrayList<Projetos>();
+		String sql =  "SELECT * FROM Projetos Where Nome LIKE '%"+nome+"%';";
+		PreparedStatement ps = Conexao.connection().prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()){
+			
+			Projetos objProjetos = new Projetos();
+			
+			objProjetos.setCodDep(rs.getString("CodDep"));
+			objProjetos.setCodProj(rs.getString("CodProj"));
+			objProjetos.setNome(rs.getString("Nome"));
+			objProjetos.setInfoProj(rs.getString("InfoProj"));
+			objProjetos.setData(rs.getDate("Data"));
+			
+			lstProjetos.add(objProjetos);		
+		}
+		ps.close();
+		Conexao.connection().close();
+		return lstProjetos;
+	}
 }

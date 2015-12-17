@@ -22,6 +22,27 @@ public class ServicosCanalTVDB {
 		Conexao.connection().close();
 	}
 	
+	public List<ServicosCanalTV> listarServicosCanalTVNome(String nome) throws ClassNotFoundException, SQLException{
+		
+		List<ServicosCanalTV> lstServicosCanalTV = new ArrayList<ServicosCanalTV>();
+		String sql =  "SELECT * FROM ServicosCanalTV WHERE NomeCanal LIKE '%"+nome+"%';";
+		PreparedStatement ps = Conexao.connection().prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()){
+			
+			ServicosCanalTV objServicosCanalTV = new ServicosCanalTV();
+			
+			objServicosCanalTV.setCodEmi(rs.getString("CodEmi"));
+			objServicosCanalTV.setNumCanal(rs.getInt("NumCanal"));
+			objServicosCanalTV.setNomeCanal(rs.getString("NomeCanal"));
+			objServicosCanalTV.setInfoCanal(rs.getString("InfoCanal"));
+			
+			lstServicosCanalTV.add(objServicosCanalTV);		
+		}
+		ps.close();
+		Conexao.connection().close();
+		return lstServicosCanalTV;
+	}
 	public List<ServicosCanalTV> listarServicosCanalTV() throws ClassNotFoundException, SQLException{
 			
 			List<ServicosCanalTV> lstServicosCanalTV = new ArrayList<ServicosCanalTV>();
